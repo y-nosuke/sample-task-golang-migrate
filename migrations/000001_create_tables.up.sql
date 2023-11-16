@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS `tasks` (
-	`id` BINARY(16) NOT NULL,
+CREATE TABLE IF NOT EXISTS `r_tasks` (
+	`id` BINARY(16) NOT NULL COMMENT 'id',
 	`title` VARCHAR(255) NOT NULL,
 	`detail` TEXT NULL,
 	`completed` BOOLEAN NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 	PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `task_registrations` (
+CREATE TABLE IF NOT EXISTS `e_task_registered` (
 	`task_id` BINARY(16) NOT NULL,
 	`title` VARCHAR(255) NOT NULL,
 	`detail` TEXT NULL,
@@ -20,10 +20,10 @@ CREATE TABLE IF NOT EXISTS `task_registrations` (
 	`created_by` BINARY(16) NOT NULL,
 	`created_at` DATETIME(6) NOT NULL,
 	PRIMARY KEY (`task_id`),
-	FOREIGN KEY `FK_task_registrations_tasks`(`task_id`) REFERENCES tasks(id) ON DELETE CASCADE
+	FOREIGN KEY `FK_task_registered_tasks`(`task_id`) REFERENCES r_tasks(id) ON DELETE CASCADE
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `task_updates` (
+CREATE TABLE IF NOT EXISTS `e_task_updated` (
 	`task_id` BINARY(16) NOT NULL,
 	`title` VARCHAR(255) NOT NULL,
 	`detail` TEXT NULL,
@@ -31,21 +31,21 @@ CREATE TABLE IF NOT EXISTS `task_updates` (
 	`created_by` BINARY(16) NOT NULL,
 	`created_at` DATETIME(6) NOT NULL,
 	PRIMARY KEY (`task_id`, `created_at`),
-	FOREIGN KEY `FK_task_updates_tasks`(`task_id`) REFERENCES tasks(id) ON DELETE CASCADE
+	FOREIGN KEY `FK_task_updated_tasks`(`task_id`) REFERENCES r_tasks(id) ON DELETE CASCADE
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `task_completions` (
+CREATE TABLE IF NOT EXISTS `e_task_completed` (
 	`task_id` BINARY(16) NOT NULL,
 	`created_by` BINARY(16) NOT NULL,
 	`created_at` DATETIME(6) NOT NULL,
 	PRIMARY KEY (`task_id`, `created_at`),
-	FOREIGN KEY `FK_task_completions_tasks`(`task_id`) REFERENCES tasks(id) ON DELETE CASCADE
+	FOREIGN KEY `FK_task_completed_tasks`(`task_id`) REFERENCES r_tasks(id) ON DELETE CASCADE
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `task_uncompletions` (
+CREATE TABLE IF NOT EXISTS `e_task_uncompleted` (
 	`task_id` BINARY(16) NOT NULL,
 	`created_by` BINARY(16) NOT NULL,
 	`created_at` DATETIME(6) NOT NULL,
 	PRIMARY KEY (`task_id`, `created_at`),
-	FOREIGN KEY `FK_task_uncompletions_tasks`(`task_id`) REFERENCES tasks(id) ON DELETE CASCADE
+	FOREIGN KEY `FK_task_uncompleted_tasks`(`task_id`) REFERENCES r_tasks(id) ON DELETE CASCADE
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
