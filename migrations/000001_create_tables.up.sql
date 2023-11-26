@@ -13,12 +13,11 @@ CREATE TABLE IF NOT EXISTS `r_tasks` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `e_task_events` (
-     `id` BINARY(16) NOT NULL,
-     `type` VARCHAR(255) NOT NULL,
-     `task_id` BINARY(16) NOT NULL,
-     `data` JSON NOT NULL,
-     `created_by` BINARY(16) NOT NULL,
-     `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-     PRIMARY KEY (`id`),
-     FOREIGN KEY `FK_task_events_tasks`(`task_id`) REFERENCES r_tasks(id) ON DELETE CASCADE
+  `id` BINARY(16) NOT NULL,
+  `type` VARCHAR(255) NOT NULL,
+  `task_id` BINARY(16) NOT NULL,
+  `data` JSON NOT NULL,
+  `created_by` BINARY(16) NOT NULL,
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
