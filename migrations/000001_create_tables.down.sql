@@ -1,3 +1,0 @@
-DROP TABLE IF EXISTS e_task_events;
-
-DROP TABLE IF EXISTS r_tasks;

@@ -1,0 +1,1 @@
+TRUNCATE TABLE `m_task_event_types`;
